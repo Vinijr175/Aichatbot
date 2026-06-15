@@ -1,4 +1,4 @@
-React AI Chatbot 
+##    React AI Chatbot 
 
 A professional, React + TypeScript chatbot that communicates securely with an Express backend proxy to interface with OpenRouter. 
 
@@ -7,7 +7,7 @@ A professional, React + TypeScript chatbot that communicates securely with an Ex
 
 Follow these instructions to run the application locally.
 
- 1. Backend Server Setup
+ ## Backend Server Setup
 
    
 1. Open a terminal and navigate to the server folder:
@@ -34,9 +34,9 @@ Follow these instructions to run the application locally.
    The server will run on http://localhost:3001.
    
 
-2. Frontend React Setup
+##  Frontend React Setup
 
-   
+ 
 1. Open a new terminal window and navigate to the frontend folder:
    bash
    cd react-chatbot
