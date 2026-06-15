@@ -1,4 +1,4 @@
-React AI Chatbot 
+###React AI Chatbot 
 
 A professional, React + TypeScript chatbot that communicates securely with an Express backend proxy to interface with OpenRouter. 
 
