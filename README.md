@@ -1,65 +1,132 @@
-##    React AI Chatbot 
+# React AI Chatbot
 
-A professional, React + TypeScript chatbot that communicates securely with an Express backend proxy to interface with OpenRouter. 
+A full-stack AI chatbot built with **React + TypeScript** and a secure **Express backend proxy**. The backend communicates with OpenRouter while keeping API keys secure and out of the frontend.
 
+## Features
 
- Setup & Installation
+* Secure backend API proxy
+* React + TypeScript frontend
+* OpenRouter AI integration
+* Error handling with user feedback
+* Unit testing with Vitest
+* Shared TypeScript types
+* Environment variable support
 
-Follow these instructions to run the application locally.
+---
 
- ## Backend Server Setup
+## Setup & Installation
 
-   
-1. Open a terminal and navigate to the server folder:
-   bash
-   cd server
-   
-2. Install the backend dependencies:
-   bash
-   npm install
-   
-3. Create a .env file from the example:
-   bash
-   copy .env.example .env
-   
-4. Open the .env file and insert your OpenRouter API key:
-   env
-   PORT=3001
-   OPENROUTER_API_KEY=your_real_openrouter_api_key
-   
-5. Start the backend server:
-   bash
-   npm start
-   
-   The server will run on http://localhost:3001.
-   
+### Clone the Repository
 
-##  Frontend React Setup
+```bash
+git clone https://github.com/Vinijr175/Aichatbot.git
+cd Aichatbot
+```
 
- 
-1. Open a new terminal window and navigate to the frontend folder:
-   bash
-   cd react-chatbot
-   
-2. Install the frontend dependencies (including Vitest testing packages):
-   bash
-   npm install
-   
-3. Start the Vite development server:
-   bash
-   npm run dev
-   
-   The app will run on http://localhost:3000.
+---
 
+## Backend Server Setup
 
-##  Running Tests
-To run the Vitest unit tests on the frontend:
-1. Navigate to the react-chatbot directory:
-   bash
-   cd react-chatbot
+Open a terminal and navigate to the server folder:
 
-2. Execute the test suite:
-   bash
-   npm run test
+```bash
+cd server
+npm install
+```
 
+Create a `.env` file from the example:
 
+**Windows:**
+
+```bash
+copy .env.example .env
+```
+
+**Mac/Linux:**
+
+```bash
+cp .env.example .env
+```
+
+Open the `.env` file and add your OpenRouter API key:
+
+```env
+PORT=3001
+OPENROUTER_API_KEY=your_real_openrouter_api_key
+```
+
+Start the backend server:
+
+```bash
+npm start
+```
+
+The backend runs on:
+
+```text
+http://localhost:3001
+```
+
+---
+
+## Frontend React Setup
+
+Open a new terminal and navigate to the frontend folder:
+
+```bash
+cd react-chatbot
+npm install
+npm run dev
+```
+
+The frontend runs on:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## Running Tests
+
+Navigate to the frontend directory:
+
+```bash
+cd react-chatbot
+npm run test
+```
+
+The tests cover:
+
+* Chat initialization
+* Successful message sending
+* Error handling scenarios
+
+---
+
+## Architecture
+
+```text
+React Frontend → Express Backend → OpenRouter API
+```
+
+The frontend sends requests to `/api/chat`, the backend securely communicates with OpenRouter using environment variables, and the response is returned to the UI.
+
+---
+
+## Security
+
+* API keys are stored in `.env`
+* `.env` is excluded from Git using `.gitignore`
+
+---
+
+## Tech Stack
+
+* React
+* TypeScript
+* Node.js
+* Express
+* Axios
+* Vitest
+* OpenRouter API
