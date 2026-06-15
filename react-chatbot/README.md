@@ -1,73 +1,40 @@
-# React + TypeScript + Vite
+React AI Chatbot (OpenRouter + Gemma)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern AI chatbot built using React + TypeScript + Vite, powered by OpenRouter API with the google/gemma-3-12b-it model. The chatbot allows users to send messages and receive intelligent AI-generated responses in real time.
 
-Currently, two official plugins are available:
+Features
+Real-time chat interface
+AI responses using OpenRouter (Gemma model)
+Loading animation while AI responds
+Markdown support for formatted AI responses
+Auto-scroll to latest message
+Clean UI with React components
+Environment variable for API key security
+Tech Stack
+React (TypeScript)
+Vite
+Axios
+OpenRouter API
+React Markdown
+ESLint
+How It Works
+User types a message in the chat input
+Message is stored in React state
+useChatbot sends request to OpenRouter API
+AI model processes the prompt (Gemma 3)
+Response is returned and displayed in chat UI
+UI updates automatically with loading animation
+Installation and Setup
+git clone https://github.com/Vinijr175/react-chatbot.git
+cd react-chatbot
+npm install
+npm run dev
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Key Concepts Used
+React Hooks (useState, useEffect, useRef)
+Custom Hooks
+API Integration (Axios)
+Async/Await
+Conditional Rendering
+State Management
+Environment Variables

@@ -1,50 +1,74 @@
 import { useState } from 'react';
 import axios from 'axios';
-
-interface Message {
-    text: string;
-    sender: 'user' | 'bot';
-}
+import type { Message, ChatResponse, ErrorResponse } from '../types/chat';
 
 const useChatbot = () => {
     const [messages, setMessages] = useState<Message[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false); 
 
     const sendMessage = async (message: string) => {
-        const newMessages: Message[] = [
-            ...messages,
-            { text: message, sender: "user" },
-        ];
-        setMessages(newMessages);
+        if (!message.trim()) return;
+
+    
+        const userMsg: Message = { text: message, sender: "user" };
+        setMessages(prev => [...prev, userMsg]);
+        setIsLoading(true); 
+
+        
+        const apiMessages = [...messages, userMsg]
+            .filter(msg => msg.sender !== 'system')
+            .map(msg => ({
+                role: msg.sender === 'user' ? 'user' as const : 'assistant' as const,
+                content: msg.text
+            }));
 
         try {
-            const response = await axios.post(
-                "https://openrouter.ai/api/v1/chat/completions",
-                {
-                     model: "google/gemma-3-12b-it",
-    
-                    messages: newMessages.map(msg => ({
-                        role: msg.sender === 'user' ? 'user' : 'assistant',
-                        content: msg.text
-                    })),
-                },
+            const response = await axios.post<ChatResponse>(
+                "/api/chat",
+                { messages: apiMessages },
                 {
                     headers: {
-                       'Authorization': `Bearer ${import.meta.env.VITE_OPENROUTER_API_KEY}`,
-                        'Content-Type': "application/json",
-                    },
+                        "Content-Type": "application/json"
+                    }
                 }
             );
-
-            
-            const botMessage = response.data.choices[0].message.content;
-            setMessages([...newMessages, { text: botMessage, sender: "bot" }]);
+                       
+            const botMessageContent = response.data?.content || "No response received.";
+            setMessages(prev => [...prev, { text: botMessageContent, sender: "bot" }]);
 
         } catch (error) {
-            console.error("Error fetching AI response", error);
+            console.error("Error fetching AI response:", error);
+            
+            let userFriendlyError = "Something went wrong while getting a response.";
+            
+            if (axios.isAxiosError(error)) {
+                if (error.response) {
+                
+                    const serverErrorObj = error.response.data as ErrorResponse;
+                    if (error.response.status === 500 && serverErrorObj.details?.includes("API key")) {
+                        userFriendlyError = "Missing API key. Check your environment setup.";
+                    } else {
+                        userFriendlyError = serverErrorObj.details || serverErrorObj.error || userFriendlyError;
+                    }
+                } else if (error.request) {
+                
+                    userFriendlyError = "Could not reach the AI service. Please verify your backend server is running.";
+                } else {
+                    userFriendlyError = error.message;
+                }
+            } else if (error instanceof Error) {
+                userFriendlyError = error.message;
+            }
+
+    
+            setMessages(prev => [...prev, { text: userFriendlyError, sender: "system" }]);
+
+        } finally {
+            setIsLoading(false); 
         }
     };
 
-    return { messages, sendMessage };
+    return { messages, sendMessage, isLoading };
 };
 
 export default useChatbot;
